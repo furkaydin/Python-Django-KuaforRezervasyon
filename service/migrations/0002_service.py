@@ -7,12 +7,12 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('appointment', '0001_initial'),
+        ('service', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Service',
+            name='service',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('title', models.CharField(max_length=30)),
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('status', models.CharField(choices=[('True', 'Evet'), ('False', 'Hayır')], max_length=10)),
                 ('create_at', models.DateTimeField(auto_now_add=True)),
                 ('update_at', models.DateTimeField(auto_now=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='appointment.category')),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='service.category')),
             ],
         ),
     ]

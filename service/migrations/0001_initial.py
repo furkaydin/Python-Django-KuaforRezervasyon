@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('slug', models.SlugField()),
                 ('create_at', models.DateTimeField(auto_now_add=True)),
                 ('update_ate', models.DateTimeField(auto_now=True)),
-                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='appointment.category')),
+                ('parent', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='children', to='service.category')),
             ],
         ),
     ]
