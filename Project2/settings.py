@@ -122,8 +122,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
 ALLOWED_HOSTS = ["*"] ### Local için
 STATIC_ROOT = '' ### Lokal için
 STATICFILES_DIRS = (os.path.join('static'),)
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
+
 
 
