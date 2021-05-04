@@ -1,13 +1,16 @@
 {% extends "homebase.html" %}
-{% load static %}
-{% block title %}
 
+{% block title %}
+{{ setting.title }}
 {% endblock %}
 {% block keywords %}
-İndex Sayfası Anahtar Kelimeler
+{{ setting.keyword}}
 {% endblock %}
 {% block description %}
-İndex Sayfası açıklama
+{{ setting.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
 {% endblock %}
 
 {% block sidebar %}
