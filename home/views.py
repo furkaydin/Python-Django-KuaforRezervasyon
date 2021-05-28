@@ -1,24 +1,30 @@
+from unicodedata import category
+
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
 from home.models import Setting,ContactFormu, ContactFormMessage
+from service.models import Service, Images , Category
 
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting':setting,'page':'home'}
+    sliderdata = Service.objects.all()
+    context = {'setting':setting,'category': category, 'page':'home','sliderdata':sliderdata}
     return render(request, 'index.html', context)
 
 def hakkimizda(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting':setting,'page':'hakkimizda'}
+    sliderdata = Service.objects.all()
+    context = {'setting':setting,'page':'hakkimizda','sliderdata':sliderdata}
     return render(request, 'hakkimizda.html', context)
 
 def referanslar(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting':setting,'page':'referanslar'}
+    sliderdata = Service.objects.all()
+    context = {'setting':setting,'page':'referanslar','sliderdata':sliderdata}
     return render(request, 'referanslarimiz.html', context)
 
 def contact(request):
@@ -36,6 +42,8 @@ def contact(request):
             return HttpResponseRedirect ('/contact')
 
     setting = Setting.objects.get(pk=1)
+
     form = ContactFormu()
-    context = {'setting': setting, 'form':form}
+    sliderdata = Service.objects.all()
+    context = {'setting': setting, 'form':form,'sliderdata':sliderdata}
     return render(request, 'contact.html', context)

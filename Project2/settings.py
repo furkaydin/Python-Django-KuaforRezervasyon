@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'service.apps.AppointmentConfig',
     'ckeditor',
     'ckeditor_uploader',
+    'mptt',
+
 
 ]
 
@@ -126,7 +128,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-ALLOWED_HOSTS = ["*"] ### Local için
+ALLOWED_HOSTS = ["127.0.0.1"] ### Local için
 STATIC_ROOT = '' ### Lokal için
 STATICFILES_DIRS = (os.path.join('static'),)
 
