@@ -1,9 +1,7 @@
 
-
-<div class="sidebar">
-    {% load static %}
             <!-- Sidebar  -->
             <nav id="sidebar">
+            {% load static %}
                 {%  if page == 'home'%}
                 <div class="category-nav">
                     {%  else %}
@@ -16,32 +14,77 @@
                 </div>
 
 
-
                 <ul class="list-unstyled components">
+                    {% load mptt_tags %}
 
+    {% recursetree category %}
+       <li class="active">
+    <li>
+                    <a href="/category/{{ node.id }}/{{ node.slug }}">{{ node.title }}</a>
+                </li>
 
-                    <li class="active">
-                        <a href="index.html">Anasayfa</a>
-                    </li>
+            {% if not node.is_leaf_node %}
+                <ul class="children">
+                <li>
+                    <a href="/category/{{ node.slug }}">{{ children }}</a>
+                </li>
 
-                    <li>
-                        <a href="recipe.html">Fiyat Listesi</a>
-                    </li>
-                    <li>
-                        <a href="blog.html">Hizmetlerimiz</a>
-                    </li>
-                   <li>
-                        <a href="/contact">İletişim</a>
-                    </li>
-                     <li>
-                        <a href="/referanslar">Referanslar</a>
-                    </li>
-                    <li>
-                        <a href="/hakkimizda">Hakkımızda</a>
-                    </li>
                 </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</li>
 
+
+
+
+<li class="active">
+    <li>
+                    <a href="/home">Anasayfa</a>
+                </li>
+
+                <li>
+                    <a href="index.html">Fiyat Listesi</a>
+                </li>
+                <li>
+                    <a href="services.html">Hizmetlerimiz</a>
+                </li>
+               <li>
+                    <a href="/contact">İletişim</a>
+                </li>
+                 <li>
+                    <a href="/referanslar">Referanslar</a>
+                </li>
+                <li>
+                    <a href="/hakkimizda">Hakkımızda</a>
+                </li>
+</li>
+                        </ul>
                 </div>
-            </nav>
+                </nav>
+                </div>
+                </div>
 
-        </div>
+
+            </ul>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

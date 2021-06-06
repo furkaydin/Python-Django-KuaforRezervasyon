@@ -29,7 +29,6 @@ class Category(MPTTModel):
     update_ate = models.DateTimeField(auto_now=True)
 
     class MPTTMeta:
-
         order_insertion_by = ['title']
 
     def __str__(self):

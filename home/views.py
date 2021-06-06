@@ -1,5 +1,7 @@
 from unicodedata import category
 
+
+import services as services
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -12,6 +14,7 @@ from service.models import Service, Images , Category
 def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = Service.objects.all()
+    category=Category.objects.all()
     context = {'setting':setting,'category': category, 'page':'home','sliderdata':sliderdata}
     return render(request, 'index.html', context)
 
@@ -47,3 +50,14 @@ def contact(request):
     sliderdata = Service.objects.all()
     context = {'setting': setting, 'form':form,'sliderdata':sliderdata}
     return render(request, 'contact.html', context)
+
+def category_services(request,id,slug):
+    category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
+    services = Service.objects.filter(category_id=id)
+    context = {'services':services,
+               'category': category,
+               'categorydata' : categorydata
+               }
+    return render(request,'services.html',context)
+
