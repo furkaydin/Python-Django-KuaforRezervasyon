@@ -5,7 +5,8 @@ from django.contrib import admin
 from django.utils.html import format_html
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from service.models import Category, Service, Images
+from service.models import Category, Service, Images, Comment
+
 
 class ServiceImageInline(admin.TabularInline):
     model = Images
@@ -62,6 +63,10 @@ class CategoryAdmin2(DraggableMPTTAdmin):
         return instance.service_cumulative_count
     related_service_cumulative_count.short_description = 'Related services (in tree)'
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['comment','service','user','status',]
+    list_filter = ['status']
+
 
 
 
@@ -72,6 +77,7 @@ class CategoryAdmin2(DraggableMPTTAdmin):
 admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Service,ServiceAdmin)
 admin.site.register(Images,ImagesAdmin)
+admin.site.register(Comment,CommentAdmin)
 
 
 
