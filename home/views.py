@@ -3,6 +3,7 @@ from unicodedata import category
 
 import services as services
 from django.contrib import messages
+from django.contrib.auth import logout, authenticate, login
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
@@ -77,4 +78,25 @@ def service_detail(request,id,slug):
            }
     return render(request,'service_detail.html',context)
 
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page.
+    return HttpResponseRedirect('/')
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+        return HttpResponseRedirect('/')
+
+
+
+    category = Category.objects.all()
+    context = {'category': category,
+
+               }
+    return render(request, 'login.html', context)
 

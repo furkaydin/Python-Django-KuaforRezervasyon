@@ -1,5 +1,7 @@
 {% load static %}
-
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- header -->
     <header>
         <div class="container-fluid">
@@ -15,14 +17,25 @@
                             <ul>
                                 <li class="dinone">Contact Us : <img style="margin-right: 15px;margin-left: 15px;" src="{%static 'images/phone_icon.png'%}" alt="#"><a href="#">987-654-3210</a></li>
                                 <li class="dinone"><img style="margin-right: 15px;" src="{%static 'images/mail_icon.png'%}" alt="#"><a href="#">onlinekuafor@gmail.com</a></li>
-                                <li class="dinone"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="{%static 'images/location_icon.png'%}" alt="#"><a href="#">Sur Yapı Marka AVM , Bursa </a></li>
-
+                                <li class="dinone"><img style="margin-right: 15px;height: 21px;position: relative;top: -2px;" src="{%static 'images/location_icon.png'%}" alt="#"><a href="#">Sur Yapı Marka AVM , Bursa</a></li>
 
                                 <li>
                                     <button type="button" id="sidebarCollapse">
                                         <img src="{%static 'images/menu_icon.png'%}" alt="#">
                                     </button>
                                 </li>
+                                                               {% if user.id is not None %}
+<span class="pull-right">
+                    <a href="#" class="btn btn-default">{{ rs.user }}</a>
+                    <a href="#" class="btn btn-default">Randevularım</a>
+                    <a href="/logout/" class="btn btn-lg btn-primary">
+                    <span class="glyphicon glyphicon-off"></span> Logout</a>
+                </span>
+    		  </h1>
+                                {% else %}
+                                <li class="button_user"><a class="button active" href="/login/">Login</a><a class="button" href="/join/">Register</a></li>
+
+{% endif %}+
                             </ul>
                         </div>
                     </div>
