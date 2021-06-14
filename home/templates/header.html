@@ -24,16 +24,16 @@
                                         <img src="{%static 'images/menu_icon.png'%}" alt="#">
                                     </button>
                                 </li>
-                                                               {% if user.id is not None %}
+                                {% if user.id is not None %}
 <span class="pull-right">
-                    <a href="#" class="btn btn-default">{{ rs.user }}</a>
+                    <a href="#" class="btn btn-default">Hesabım</a>
                     <a href="#" class="btn btn-default">Randevularım</a>
                     <a href="/logout/" class="btn btn-lg btn-primary">
                     <span class="glyphicon glyphicon-off"></span> Logout</a>
                 </span>
     		  </h1>
                                 {% else %}
-                                <li class="button_user"><a class="button active" href="/login/">Login</a><a class="button" href="/join/">Register</a></li>
+                                <li class="button_user"><a class="button active" href="/login/">Login</a><a class="button" href="/signup/">Register</a></li>
 
 {% endif %}+
                             </ul>
