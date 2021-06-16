@@ -27,6 +27,7 @@ urlpatterns = [
     path('contact/', views.contact, name='iletisim'),
     path('admin/', admin.site.urls),
     path('service/', include('service.urls')),
+    path('user/', include('user.urls')),
     path('',include('home.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('category/<int:id>/<slug:slug>/', views.category_services, name='category_services'),
