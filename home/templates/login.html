@@ -1,0 +1,89 @@
+{% extends "homebase.html" %}
+{% block title %}
+    Login - {{ setting.company }}
+
+{% endblock %}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% block keywords %}
+{{ setting.keyword}}
+{% endblock %}
+{% block description %}
+{{ setting.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="billing-details">
+
+                            <div class="section-title">
+                                <h3 class="title">Giriş Yap</h3>
+                            </div>
+                             {%  if messages  %}
+                    {% for messages in messages %}
+                    <div class="alert alert-{{ messages.tags }}" role="alert">
+                        {{ messages }}
+                    </div>
+                    {%  endfor %}
+                {%  endif %}
+
+                        <div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+
+
+
+                 <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" name="username" placeholder="username">
+
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" class="form-control" name="password" placeholder="password">
+					</div>
+                    <input type="submit" value="Login">
+                     <li class="button_user"> <a class="button active" href="/signup/">Register</a>
+                </form>
+
+                    </div>
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </fooetr>
+
+    </div>
+
+{% endblock %}

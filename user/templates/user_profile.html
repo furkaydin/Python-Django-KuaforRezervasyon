@@ -1,0 +1,54 @@
+{% extends "homebase.html" %}
+{% block title %}
+   {{ profile.user }} Profili
+
+{% endblock %}
+
+
+{% block keywords %}
+{{ setting.keyword}}
+{% endblock %}
+{% block description %}
+{{ setting.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                            {% include "user_panel.html" %}
+            </div>
+                <div class="col-md-8">
+                    <div class="section-title">
+                        <h2>--User Profile--</h2>
+                    </div>
+                    {% include "user_informations.html" %}
+    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+
+{% endblock %}

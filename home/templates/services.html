@@ -1,0 +1,77 @@
+{% extends "homebase.html" %}
+{% block title %}
+    {{ categorydata.title }} Services
+
+{% endblock %}
+
+
+{% block keywords %}
+{{ categorydata.keyword}}
+{% endblock %}
+{% block description %}
+{{ categorydata.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="breadcrumb">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li><a href="/">Anasayfa</a></li>
+                    <li class="active">/ {{ categorydata.title }}</li>
+                </ul>
+            </div>
+    </div>
+
+    <div class="section">
+            <div class="container">
+                <div class="row">
+                    <!-- blog -->
+<div class="blog">
+  <div class="container">
+    <div class="row">
+     {% for rs in services %}
+      <div class="col-md-12">
+        <div class="title">
+          <i><img src="images/title.png" alt="#"/></i>
+
+          <span>{{ rs.category }} {{ rs.status }}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mar_bottom">
+        <div class="blog_box">
+          <div class="blog_img_box">
+            <figure><img src="{{ rs.image.url }}" alt="#"/>
+             <span>{{ rs.price }}</span>
+            </figure>
+          </div>
+          <h3> <a href="/service/{{ rs.id }}/{{ rs.slug }}">{{ rs.title }}</h3></a>
+          <p>{{ rs.description }}</p>
+            <a href="/service/{{ rs.id }}/{{ rs.slug }}" class="main_bt_border" href="#">Rezerve Et</a>
+        </div>
+
+      </div>
+
+
+                    {% endfor %}
+<!-- end blog -->
+                </div>
+            </div>
+    </div>
+
+{% endblock %}
+</div>
+</div>
+</div>

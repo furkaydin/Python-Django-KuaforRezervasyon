@@ -1,0 +1,165 @@
+yorum kısmına tekrar bakılacak.
+{% extends "homebase.html" %}
+{% block title %}
+{{ service.title }}
+
+{% endblock %}
+
+
+{% block keywords %}
+{{ service.keyword}}
+{% endblock %}
+{% block description %}
+{{ service.description }}
+{% endblock %}
+{% block head %}
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div id="breadcrumb">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li><a href="/">Anasayfa</a></li>
+                    <li><a href="/">Hizmetlerimiz</a></li>
+                    <li><a href="/category/{{ service.category_id }}/{{ service.category.slug }}"> /{{ service.category }}</a></li>
+                    <li class="active"> /{{ service.title }}</li>
+                </ul>
+            </div>
+    </div>
+
+   <!-- Container for the image gallery -->
+<div class="container">
+
+  <!-- Full-width images with number text -->
+{% for rs in images %}
+  <div class="mySlides">
+    <div class="numbertext">1 / 6</div>
+      <img src="{{ rs.image.url }}" style="width:100%">
+  </div>
+    {% endfor %}
+
+
+
+  <!-- Next and previous buttons -->
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+  <!-- Image text -->
+  <div class="caption-container">
+    <p id="caption"></p>
+  </div>
+
+  <!-- Thumbnail images -->
+  <div class="row">
+      {% for rs in images %}
+    <div class="column">
+      <img class="demo cursor" src="{{ rs.image.url }}" style="width:100%" onclick="currentSlide(1)" alt="{{ service.title }}">
+    </div>
+      {% endfor %}
+<button type="button" class="block">Randevu Al ({{ service.price }}TL)</button>
+
+  </div>
+
+
+<div class="section">
+            <div class="container">
+                <div class="row">
+                   <p>{{ service.detail | safe }}</p>
+                </div>
+            </div>
+    </div>
+<div class="col-md-6">
+    {% if messages %}
+         {% for messages in messages %}
+    <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{ messages }}
+</div>
+    {% endfor %}
+{% endif %}
+
+</div>
+<div class="container">
+  <form class="review-form" action="/service/addcomment/{{ service.id }}" method="post">
+      {% csrf_token %}
+
+    <div class="row">
+      <div class="col-25">
+        <label for="subject">Subject</label>
+      </div>
+      <div class="col-75">
+        <input type="text" id="subject" name="subject" placeholder="Konuyu giriniz..">
+      </div>
+    </div>
+
+
+
+    <div class="row">
+      <div class="col-25">
+        <label for="comment">Comment</label>
+      </div>
+      <div class="col-75">
+        <textarea id="comment" name="comment" placeholder="Write something.." style="height:200px"></textarea>
+      </div>
+    </div>
+      {% if user.id is not None %}
+    <div class="row">
+      <input type="submit" value="Submit">
+        {% else %}
+        Yorum eklemek için lütfen <a href="/login">login</a> olunuz.
+        {% endif %}
+    </div>
+  </form>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<div class="container">
+	<h2 class="text-center">Review</h2>
+{% for rs in comments %}
+	<div class="card">
+	    <div class="card-body">
+	        <div class="row">
+        	    <div class="col-md-2">
+
+                    {% if rs.user.userprofile.image.url is not None %}
+        	        <img src="{{ rs.user.userprofile.image.url }}" class="img img-rounded img-fluid"/>
+                    {% else %}
+                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                    {% endif %}
+                <p class="text-secondary text-center">{{ rs.create_at }}</p>
+        	    </div>
+        	    <div class="col-md-10">
+                    <p>
+        	            <a class="float-left"><strong>{{ rs.user }}</strong></a>
+                    </p>
+
+        	       <div class="clearfix"></div>
+        	        <p>{{ rs.comment }}</p>
+        	        <p>
+        	            <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+        	            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+        	       </p>
+        	    </div>
+	        </div>
+            {% endfor %}
+            	    </div>
+	            </div>
+	    </div>
+	</div>
+</div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "homebase.html" %}
+{% block title %}
+    Sign Ip - {{ setting.company }}
+
+{% endblock %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+{% block keywords %}
+{{ setting.keyword}}
+{% endblock %}
+{% block description %}
+{{ setting.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="billing-details">
+
+                            <div class="section-title">
+                                <h3 class="title">Sizde üyelerimize özel ayrıcalıklardan faydalanmak için üye olun.</h3>
+                            </div>
+                             {%  if messages  %}
+                    {% for messages in messages %}
+                    <div class="alert alert-{{ messages.tags }}" role="alert">
+                        {{ messages }}
+                    </div>
+                    {%  endfor %}
+                {%  endif %}
+
+                        <div class="container" id="wrap">
+	  <div class="row">
+        <div class="col-md-6 col-md-offset-2">
+            <form action="" method="post" accept-charset="utf-8" class="form" role="form">   <legend>Sign Up</legend>
+            {% csrf_token %}
+                {% for field in form %}
+                <p>
+                    {{ field.label_tag }}<br>
+                    {{ field }}
+                    {% if field.help_text %}
+                     <small style="color: #grey">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            </p>
+
+            {% endfor %}
+            <button class="btn btn-lg btn-primary btn-block signup-btn" type="submit">
+                        Create my account</button>
+            </form>
+          </div>
+</div>
+</div>
+</div>
+    </fooetr>
+
+    </div>
+
+    </div>
+            </div>
+    </div>
+{% endblock %}

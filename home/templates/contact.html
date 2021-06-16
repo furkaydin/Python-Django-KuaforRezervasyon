@@ -1,0 +1,77 @@
+{% extends "homebase.html" %}
+{% block title %}
+    Contact Us - {{ setting.company }}
+
+{% endblock %}
+
+
+{% block keywords %}
+{{ setting.keyword}}
+{% endblock %}
+{% block description %}
+{{ setting.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="billing-details">
+
+                            <div class="section-title">
+                                <h3 class="title">İletişim Formu</h3>
+                            </div>
+                             {%  if messages  %}
+                    {% for messages in messages %}
+                    <div class="alert alert-{{ messages.tags }}" role="alert">
+                        {{ messages }}
+                    </div>
+                    {%  endfor %}
+                {%  endif %}
+
+
+                 <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <input type="submit" value="Gönder">
+                </form>
+
+                    </div>
+            </div>
+                <div class="col-md-8">
+                    <div class="section-title">
+                        <h3 class="title">İletişim Bilgilerimiz</h3>
+                    </div>
+                    {{ setting.contact | safe}}
+    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+            <div class="copyright">
+                <div class="container">
+                    <p>© 2021 All Rights Reserved. Design by<a href="https://www.instagram.com/brycees"> Furkan Aydın</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+{% endblock %}
