@@ -10,7 +10,7 @@ class ContactFormMessageAdmin(admin.ModelAdmin):
 
 @admin_thumbnails.thumbnail('image')
 class UserProfileAdmin(admin.ModelAdmin):
-    list_display = ['name','phone','image_thumbnail']
+    list_display = ['user','phone','image_thumbnail']
 
 
 
