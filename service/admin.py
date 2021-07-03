@@ -5,7 +5,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from mptt.admin import MPTTModelAdmin, DraggableMPTTAdmin
 
-from service.models import Category, Service, Images, Comment
+from service.models import Category, Service, Images, Comment, Barber
 
 
 class ServiceImageInline(admin.TabularInline):
@@ -18,6 +18,9 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['title', 'status','image_thumbnail']
     list_filter = ['status', ]
 
+class BarberAdmin(admin.ModelAdmin):
+
+    list_display = ['name']
 
 @admin_thumbnails.thumbnail('image')
 class ServiceAdmin(admin.ModelAdmin):
@@ -78,6 +81,7 @@ admin.site.register(Category,CategoryAdmin2)
 admin.site.register(Service,ServiceAdmin)
 admin.site.register(Images,ImagesAdmin)
 admin.site.register(Comment,CommentAdmin)
+admin.site.register(Barber,BarberAdmin)
 
 
 

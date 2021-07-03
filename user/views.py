@@ -1,3 +1,4 @@
+
 from django.contrib import messages
 
 from django.contrib.auth import update_session_auth_hash
@@ -7,8 +8,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from home.models import UserProfile
-from service.models import Category
+from home.models import UserProfile, Setting
+from reserve.models import Reserve
+from service.models import Category, Comment
 from user.forms import UserUpdateForm, ProfileUpdateForm
 
 
@@ -62,3 +64,46 @@ def change_password(request):
         return render(request, 'change_password.html', {
             'form':form,'category':category
         })
+
+
+@login_required(login_url="/login")
+def reserve(request):
+    category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
+    current_user = request.user
+    reserve = Reserve.objects.filter(user_id=current_user.id)
+
+    context = {
+        'category': category,
+        'reserve': reserve,
+        'setting': setting,
+    }
+    return render(request, 'user_reserve.html', context)
+
+@login_required(login_url="/login")
+def deletereserve(request,id):
+    current_user = request.user
+    Reserve.objects.filter(id=id, user_id=current_user.id).delete()
+    messages.success(request, 'Randevu İptal Edildi')
+    return HttpResponseRedirect('/user/reserve')
+
+
+@login_required(login_url="/login")
+def user_comments(request):
+    category = Category.objects.all()
+    setting = Setting.objects.get(pk=1)
+    current_user = request.user
+    comments = Comment.objects.filter(user_id=current_user.id)
+    context = {
+        'category': category,
+        'comments': comments,
+        'setting':setting,
+    }
+    return render(request, 'user_comments.html', context)
+
+@login_required(login_url='/login') # Check login
+def user_deletecomment(request,id):
+    current_user = request.user
+    Comment.objects.filter(id=id, user_id=current_user.id).delete()
+    messages.success(request, 'Comment deleted..')
+    return HttpResponseRedirect('/user/comments')

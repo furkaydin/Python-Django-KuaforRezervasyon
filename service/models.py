@@ -48,9 +48,9 @@ class Category(MPTTModel):
 
 class Service(models.Model):
         STATUS = (
-            ('Male', 'Erkek'),
-            ('Female', 'Kadın'),
-            ('Both', 'İkiside'),
+            ('New', 'New'),
+            ('True', 'True'),
+            ('False', 'False'),
         )
 
         category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -110,7 +110,15 @@ class CommentForm(ModelForm):
              fields = ['subject','comment']
 
 
-
+class Barber(models.Model):
+    STATUS = (
+        ('Dolu', 'Dolu'),
+        ('Müsait', 'Müsait'),
+    )
+    name = models.CharField(max_length=50, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS, default='Müsait')
+    def __str__(self):
+        return self.name
 
 
 

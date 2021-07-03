@@ -9,8 +9,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.form import SignUpForm
-from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile
-from service.models import Service, Images, Category, Comment
+from home.models import Setting, ContactFormu, ContactFormMessage, UserProfile, FAQ
+from service.models import Service, Images, Category, Comment, Barber
 
 
 def index(request):
@@ -71,11 +71,13 @@ def service_detail(request,id,slug):
     category = Category.objects.all()
     service = Service.objects.get(pk=id)
     images = Images.objects.filter(service_id=id)
+    barber = Barber.objects.all()
     comments = Comment.objects.filter(service_id=id,status='True')
     context = {'service': service,
                'category': category,
                'images': images,
                'comments': comments,
+               'barber':barber,
            }
     return render(request,'service_detail.html',context)
 
@@ -127,3 +129,18 @@ def signup_view(request):
 
                    }
     return render(request, 'signup.html', context)
+
+
+def faq(request):
+    category = Category.objects.all()
+    faq = FAQ.objects.all()
+    setting = Setting.objects.get(pk=1)
+
+
+    context = {
+        'faq': faq,
+        'category':category,
+        'setting':setting,
+
+    }
+    return render(request, 'faq.html', context)

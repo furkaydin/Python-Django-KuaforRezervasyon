@@ -31,7 +31,11 @@
              <div class="about_box">
                  <h3>{{ rs.title }}</h3>
                  <p>{{ rs.description }} </p>
+                 {% if rs.status == 'True' %}
                  <a href="/service/{{ rs.id }}/{{ rs.slug }}">Randevu Al <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                 {% else %}
+                     <p>Bu servis müsait değil!</p>
+                 {% endif %}
              </div>
          </div>
           <div class="col-xl-5 col-lg-5 col-md-10 col-sm-12 about_img_boxpdnt">

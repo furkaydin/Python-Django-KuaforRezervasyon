@@ -1,0 +1,84 @@
+{% extends "homebase.html" %}
+{% block title %}
+   {{ profile.user }} Profili
+
+{% endblock %}
+
+
+{% block keywords %}
+{{ setting.keyword}}
+{% endblock %}
+{% block description %}
+{{ setting.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                            {% include "user_panel.html" %}
+            </div>
+                <div class="col-md-8">
+                    <div class="section-title">
+                        <h2>--User Comments--</h2>
+                        {% if messages %}
+         {% for messages in messages %}
+    <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{ messages }}
+</div>
+    {% endfor %}
+{% endif %}
+                    </div>
+                    <div class="row text-center">
+
+                        {% for rs in comments %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                           <div class="service-widget">
+
+                                <h3><a href="/service/{{ rs.service.id }}/{{ rs.service.slug }}"><b>{{ rs.service.title }}</b></a></h3>
+                                <h5>{{ rs.subject }}</h5>
+                               <p>{{ rs.comment }}</p>
+                               <p>{{ rs.create_at }}</p>
+
+                               {% if rs.status == 'New' %}
+                                            <td><a class="primary-btn" href="/user/deletecomment/{{ rs.id }}" onclick="return confirm('Yorum Silinecek! Emin misiniz?')"> Sil </a></td>
+                                        {% else %}
+                                        <td><b>YORUM SİLİNEMEZ!</b></td>
+                                        {% endif %}
+                               <p>{{ rs.status }}</p>
+                            </div><!-- end service -->
+                        </div>
+
+                        {% endfor %}
+                    </div><!-- end row -->
+    </div>
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+
+{% endblock %}

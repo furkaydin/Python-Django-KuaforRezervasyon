@@ -22,12 +22,16 @@
 
                 <div class="item">
                     <div class="product_blog_img">
-                        <img src="{{ rs.image.url }}" alt="#" />
+                        <img src="{{ rs.image.url }}" style="height: 300px;" alt="#" />
                     </div>
                     <div class="product_blog_cont">
                         <h3>{{ rs.title }}</h3>
                         <p>{{ rs.keyword }}</p>
-                         <a href="/service/{{ rs.id }}/{{ rs.slug }}" class="main_bt_border" href="#">Rezerve Et</a>
+                        {% if rs.status == 'True' %}
+                         <a href="/service/{{ rs.id }}/{{ rs.slug }}" class="main_bt_border">Rezerve Et</a>
+                        {% else %}
+                        <p>Bu servis müsait değil!</p>
+                        {% endif %}
                         <h4><span class="theme_color">Tl</span>{{ rs.price }}</h4>
                     </div>
                 </div>

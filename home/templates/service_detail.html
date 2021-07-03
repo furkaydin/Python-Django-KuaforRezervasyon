@@ -68,9 +68,59 @@ yorum kısmına tekrar bakılacak.
       <img class="demo cursor" src="{{ rs.image.url }}" style="width:100%" onclick="currentSlide(1)" alt="{{ service.title }}">
     </div>
       {% endfor %}
-<button type="button" class="block">Randevu Al ({{ service.price }}TL)</button>
+  <br><br>
+  <div class="service-btns">
+      {% if messages %}
+         {% for messages in messages %}
+    <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{ messages }}
+</div>
+    {% endfor %}
+{% endif %}
+      <form class="row" action="/reserve/sendreserve/{{ service.id }}" method="post">
+                                    {% csrf_token %}
+
+
+                                            GÜN<input type="date" name="date" id="date" style="width:200px;" class="form-control">
+
+
+                                            SAAT<input type="time" name="time" id="time" style="width:200px;" class="form-control">
+
+<label>BERBER SEÇ:</label>
+
+
+    {% for rs in barber %}
+        {% if rs.status == 'Müsait' %}
+            <table style="border-color: #0a0a0a">
+            <thead>
+            <tr> | {{ rs.name }} |</tr><br>
+            <tr>{{ rs.status }}</tr>
+            </thead>
+
+
+            </table>
+        {% endif %}
+    {% endfor %}
+      <input type="text" name="barber" placeholder="Berberiniz?..">
+
+
+
+                                        {% if user.id is not None %}
+
+                                            <button type="submit" value="SEND" id="submit" class="btn btn-light btn-radius btn-brd grd1 btn-block subt">Randevu Al</button>
+
+                                        {% else %}
+
+                                            <a href="/login" class="btn btn-light btn-radius btn-brd grd1 btn-block subt">Giriş Yap</a>
+
+                                        {% endif %}
+
+                                </form>
+  </div>
 
   </div>
+
 
 
 <div class="section">

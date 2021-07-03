@@ -1,0 +1,87 @@
+{% extends "homebase.html" %}
+{% block title %}
+   {{ profile.user }} Profili
+
+{% endblock %}
+
+
+{% block keywords %}
+{{ setting.keyword}}
+{% endblock %}
+{% block description %}
+{{ setting.description }}
+{% endblock %}
+{% block head %}
+<link rel='shortcut icon' type='images/1005792.png' href='{{ setting.icon.url}}' />
+{% endblock %}
+
+{% block sidebar %}
+{%  include "sidebar.html" %}
+{% endblock %}
+
+{% block slider %}
+{% include "slider.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                            {% include "user_panel.html" %}
+            </div>
+                <div class="col-md-8">
+                    <div class="section-title">
+                        <h2>--User Reservations--</h2>
+                        {% if messages %}
+         {% for messages in messages %}
+    <div class="alert">
+  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        {{ messages }}
+</div>
+    {% endfor %}
+{% endif %}
+                    </div>
+                    <div class="row text-center">
+
+                        {% for rs in reserve %}
+                        <div class="col-md-4 col-sm-6 col-xs-12">
+                           <div class="service-widget">
+                                <div class="post-media wow fadeIn">
+
+                                    <a href="/service/{{ rs.service.id }}/{{ rs.service.slug }}"><img src="{{ rs.service.image.url }}" style="width: 1000px; height: 300px;" alt="" class="img-responsive img-rounded"></a>
+                                </div>
+                                <h3><a href="/service/{{ rs.service.id }}/{{ rs.service.slug }}"><b>{{ rs.service.title }}</b></a></h3>
+                                <h2>{{ rs.service.price }} TL</h2>
+                               <p>{{ rs.date }}</p>
+                               <p>{{ rs.time }}</p>
+                               <p>{{ rs.barber }}</p>
+                               {% if rs.status == 'Yeni' %}
+                                            <td><a class="primary-btn" href="/user/deletereserve/{{ rs.id }}" onclick="return confirm('İptal Edilecek! Emin misiniz?')"> İptal Et </a></td>
+                                        {% else %}
+                                        <td><b>Randevu İPTAL EDİLEMEZ!</b></td>
+                                        {% endif %}
+                               <p>{{ rs.status }}</p>
+                            </div><!-- end service -->
+                        </div>
+
+                        {% endfor %}
+                    </div><!-- end row -->
+    </div>
+
+
+
+
+
+
+
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </footer>
+
+
+
+{% endblock %}
